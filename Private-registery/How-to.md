@@ -26,7 +26,7 @@ $ kubectl create -f deployment-definition.yaml
 
 - If you want to create using a yaml file
 ```
-$ kubectl create secret docker-registry myregistrykey --docker-server=your-registry-server --docker-username=your-name --docker-password=your-password --docker-email=your-email --dry-run -oyaml
+$ kubectl create secret docker-registry myregistrykey --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-password> --docker-email=<your-email> --dry-run -oyaml
 apiVersion: v1
 data:
   .dockerconfigjson: XXXXXXXXXX
