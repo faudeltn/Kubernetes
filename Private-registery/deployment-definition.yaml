@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: faudel/nginx:test
+          name: nginx
+          ports:
+            - containerPort: 80
+              name: web
+      imagePullSecrets:
+        - name: myregistrykey
