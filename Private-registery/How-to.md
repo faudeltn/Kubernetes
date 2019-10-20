@@ -9,7 +9,7 @@ where:
 
 | Key | Description |
 | --- | --- |
-| <your-registry-server> | is your Private Docker Registry FQDN. (https://index.docker.io/v1/ for DockerHub) |
+| `<your-registry-server>` | is your Private Docker Registry FQDN. (https://index.docker.io/v1/ for DockerHub) |
 | <your-name> | is your Docker username. |
 | <your-password> | is your Docker password. |
 | <your-email> | is your Docker email. |
