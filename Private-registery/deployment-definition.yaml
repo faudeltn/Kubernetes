@@ -15,7 +15,7 @@ spec:
         app: web
     spec:
       containers:
-        - image: faudel/nginx:test
+        - image: <your-private-image> ##CHANGE ME 
           name: nginx
           ports:
             - containerPort: 80
