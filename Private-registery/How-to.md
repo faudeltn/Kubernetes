@@ -25,16 +25,23 @@ myregistrykey                        kubernetes.io/dockerconfigjson        1    
 mysql-secret                         Opaque                                1      62d
 ```
 
-- Check the docker-registry
+- To understand the contents of the `myregistrykey` Secret you just created, execute the below command to inspect the Secret in YAML format:
 ```
-$ kubectl get secret myregistrykey -o json | jq ".data[]" -r | base64 -d                                  
-{"auths":{"https://index.docker.io/v1/":{"username":"user","password":"Password","email":"xxxx@yallalabs.com","auth":"ZmF1ZGcdekZhdWRlbDA1OTA="}}}
+$ apiVersion: v1
+data:
+  .dockerconfigjson: XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+kind: Secret
+metadata:
+  creationTimestamp: "2019-10-20T16:20:23Z"
+  name: myregistrykey
+  namespace: default
+  resourceVersion: "161209"
+  selfLink: /api/v1/namespaces/default/secrets/myregistrykey
+  uid: 39d7b59d-2aaa-47e2-8f1c-fa316815dfe5
+type: kubernetes.io/dockerconfigjson
 ```
 
-- Create a deployment
-```
-$ kubectl create -f deployment-definition.yaml
-```
+
 
 
 
@@ -68,3 +75,8 @@ The output is similar to this:
 ```
 
 
+- Create a Deployment where we add the `imagePullSecrets` field that we specified that Kubernetes should get the credentials from a Secret named `myregistrykey` tp pull the image.
+
+```
+$ kubectl create -f deployment-definition.yaml
+```
