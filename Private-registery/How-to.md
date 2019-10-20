@@ -17,7 +17,7 @@ $ kubectl get secret myregistrykey -o json | jq ".data[]" -r | base64 -d
 {"auths":{"https://index.docker.io/v1/":{"username":"user","password":"Password","email":"xxxx@yallalabs.com","auth":"ZmF1ZGcdekZhdWRlbDA1OTA="}}}
 ```
 
-Create a deployment
+- Create a deployment
 ```
 $ kubectl create -f deployment-definition.yaml
 ```
