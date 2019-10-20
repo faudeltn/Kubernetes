@@ -74,10 +74,14 @@ The output is similar to this:
 ```
 {"auths":{"<your-registry-server>":{"username":"<your-name>","password":"<your-password>","email":"<your-email>","auth":"XXXXXXXXXXXXXXXXXX"}}}
 ```
+- Create a Deployment Using the Secret:
 
+To pull the image from the private repository, Kubernetes needs credentials. The `imagePullSecrets` field in the configuration file `deployment-definition.yaml` specifies that Kubernetes should get the credentials from a Secret named `myregistrykey`
 
-- Create a Deployment where we add the `imagePullSecrets` field that we specified that Kubernetes should get the credentials from a Secret named `myregistrykey` tp pull the image.
+Clone the contents of `deployment-definition.yaml` and replace `<your-private-image>` with the path to an image in your private repository.
 
+- Create a Deployment that uses your Secret, and verify that the Pod is running:
 ```
 $ kubectl create -f deployment-definition.yaml
+$ kubectl get pods
 ```
