@@ -1,5 +1,6 @@
 This Lab shows how to create a Deployment that uses a Secret to pull an image from a private Docker registry or repository
 -
+![Alt text](http://www.addictedtoibiza.com/wp-content/uploads/2012/12/example.png)
 
 - Create a secret 
 ```
