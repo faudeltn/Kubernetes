@@ -16,9 +16,8 @@ spec:
     spec:
       containers:
         - image: <your-private-image> ##CHANGE ME 
-          name: nginx
+          name: web
           ports:
-            - containerPort: 80
-              name: web
+            - containerPort: 80 ## CHANGE IT, DEPENDS OF YOUR IMAGE
       imagePullSecrets:
         - name: myregistrykey
