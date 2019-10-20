@@ -1,4 +1,4 @@
-#This Lab shows how to create a Deployment that uses a Secret to pull an image from a private Docker registry or repository
+# This Lab shows how to create a Deployment that uses a Secret to pull an image from a private Docker registry or repository
 
 - Create a secret 
 ```
@@ -6,12 +6,27 @@ $ kubectl create secret docker-registry myregistrykey --docker-server=<your-regi
 ```
 where:
 
+:toc: macro
+:toc-title:
+:toclevels: 99
+# Title
+
+toc::[]
+
+## A
+
+### A2
+
+## B
+
+### B2
 *<your-registry-server> is your Private Docker Registry FQDN. (https://index.docker.io/v1/ for DockerHub)
 *<your-name> is your Docker username.
 *<your-password> is your Docker password.
 *<your-email> is your Docker email.
   
 You have successfully set your Docker credentials in the cluster as a Secret called regcred.
+
 - 
 ```
 $ kubectl get secret
