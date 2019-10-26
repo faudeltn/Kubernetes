@@ -8,7 +8,7 @@ Kubernetes Secrets can store simple values like usernames and passwords. They ca
 We will go through the process of creating Secrets from literal values and files. We'll supply these values to Pods as environment variables and directories.
 
 
-### Method 1: Use from-literal CLI argument
+### Method 1: Creating Secrets from literal
 
 ```
 $ kubectl create secret generic mysecret --from-literal=username=lotfi --from-literal=password=mypassword
@@ -22,7 +22,7 @@ default-token-k24z2   kubernetes.io/service-account-token   3         36m
 mysecret              Opaque                                2         5s
 ```
 
-### Method 2: Create Secrets from Files
+### Method 2: Creating Secrets from Files
 Another way of creating secrets from the CLI is to first create a file with the required contents. For example, we can put the username and password in files and then use the files in kubectl command
 
 ```
@@ -43,7 +43,7 @@ default-token-k24z2   kubernetes.io/service-account-token   3         46m
 file-secrets          Opaque                                2         43s
 mysecret              Opaque                                2         9m
 ```
-
+### Creating Secrets from Manifest file
 
 ```
 password=$(echo -n "mypassword" | base64)
@@ -54,7 +54,7 @@ user=$(echo -n "lotfi" | base64)
 echo "apiVersion: v1
 kind: Secret
 metadata:
-  name: manifest-secret
+  name: secret-manifest
 type: Opaque
 data:
   username: $user
@@ -70,9 +70,63 @@ master $ kubectl get secrets
 NAME                  TYPE                                  DATA      AGE
 default-token-k24z2   kubernetes.io/service-account-token   3         53m
 file-secrets          Opaque                                2         8m
-manifest-secret       Opaque                                2         5s
+secret-manifest       Opaque                                2         5s
 mysecret              Opaque                                2         17m
 ```
+
+
+## Using Secrets as Environment Variables
+
+Let's create a kubernetes pod manifest 
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-env
+spec:
+  containers:
+  - name: redis-container
+    image: redis
+    env:
+      - name: USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: password
+```
+
+## Using Secrets as Files in a Pod through mounted Volumes
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-vol
+spec:
+  containers:
+  - name: redis-container
+    image: redis
+    volumeMounts:
+    - name: config
+      mountPath: "/etc/secrets/config"
+      readOnly: true
+  volumes:
+  - name: config
+    secret:
+      secretName: mysecret
+    items:
+    - key: username
+      path: username
+    - key: password
+      path: password
+```
+
+
+kubectl exec -it redis-vol -- /bin/bash
 
 #### Create Secrets from Files
 https://www.katacoda.com/boxboat/courses/kf3/02-secrets
