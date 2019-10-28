@@ -79,7 +79,8 @@ mysecret              Opaque                                2         17m
 
 Let's create a kubernetes pod manifest 
 ```
-apiVersion: v1
+
+echo "apiVersion: v1
 kind: Pod
 metadata:
   name: redis-env
@@ -97,7 +98,14 @@ spec:
         valueFrom:
           secretKeyRef:
             name: mysecret
-            key: password
+            key: password" >> kubectl create -f | pod-env.yaml
+```
+
+- Now, we can go into the Redis container from our Pod and check the environment variables:
+```
+master $ kubectl exec -ti redis-env env | egrep "USERNAME|SECRET_PASSWORD"
+USERNAME=lotfi
+SECRET_PASSWORD=mypassword
 ```
 
 ## Using Secrets as Files in a Pod through mounted Volumes
