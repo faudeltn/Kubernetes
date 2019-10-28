@@ -29,7 +29,7 @@ Another way of creating secrets from the CLI is to first create a file with the 
 $ echo "lotfi" > username
 $ echo "mypassword" > password
 ```
-
+- create a secret called file-secret as below
 ```
 $ kubectl create secret generic file-secrets  --from-file=username --from-file=password
 secret/file-secrets created
