@@ -98,7 +98,11 @@ spec:
         valueFrom:
           secretKeyRef:
             name: mysecret
-            key: password" >> kubectl create -f | pod-env.yaml
+            key: password" >> pod-env.yaml
+```
+
+```
+kubectl create -f pod-env.yaml
 ```
 
 - Now, we can go into the Redis container from our Pod and check the environment variables:
@@ -110,7 +114,7 @@ SECRET_PASSWORD=mypassword
 
 ## Using Secrets as Files in a Pod through mounted Volumes
 ```
-apiVersion: v1
+echo "apiVersion: v1
 kind: Pod
 metadata:
   name: redis-vol
@@ -130,11 +134,21 @@ spec:
     - key: username
       path: username
     - key: password
-      path: password
+      path: password" >> pod-volume.yaml
 ```
 
+```
+$ kubectl create -f pod-volume.yaml
+```
 
-kubectl exec -it redis-vol -- /bin/bash
+```
+$ kubectl exec -it redis-vol -- /bin/bash
+# cat /etc/secrets/config/username
+lotfi
+# cat /etc/secrets/config/password
+mypassword
+
+```
 
 #### Create Secrets from Files
 https://www.katacoda.com/boxboat/courses/kf3/02-secrets
