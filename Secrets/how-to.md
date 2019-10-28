@@ -140,7 +140,7 @@ spec:
 ```
 $ kubectl create -f pod-volume.yaml
 ```
-
+- Now that we've created the pod, we can open up a bash shell and check out those secret files
 ```
 $ kubectl exec -it redis-vol -- /bin/bash
 # cat /etc/secrets/config/username
