@@ -94,7 +94,7 @@ $ kubectl create clusterrolebinding waderni --clusterrole=cluster-admin --user=w
 
 04- client connection using kubectl
 ```
-export export KUBECONFIG=$PWD/kubeconfig
+export KUBECONFIG=$PWD/kubeconfig
 kubectl config set-credentials waderni --client-key=$PWD/waderni.key --embed-certs=true
 kubectl config set current-context waderni@kubernetes
 kubectl config view
@@ -109,6 +109,6 @@ Server Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.2", GitCom
 
 
 ```
-kubectl --kubeconfig=./kubeconfig --context=kube-ops@waderni get clusterrolebindings waderni
+kubectl --kubeconfig=./kubeconfig --context=waderni@kubernetes get clusterrolebindings waderni
 kubectl set-credentials --kubeconfig=.kube/config --context=waderni@kubernetes --client-key=waderni.key --embed-certs=true get clusterrolebindings waderni
 ```
