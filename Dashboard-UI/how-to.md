@@ -52,6 +52,10 @@ ca.crt:     1025 bytes
 namespace:  11 bytes
 token: <your token will be shown here>
 ```
+or you can get just only the token by running:
+```
+$ kubectl get secret -n kube-system $(kubectl get serviceaccount dashboard-admin -n kube-system -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode | tr -d '\n'
+```
 
 ### Accessing the Dashboard UI
 
