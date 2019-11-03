@@ -6,7 +6,7 @@ The Dashboard UI is not deployed by default. To deploy it, run the following com
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 ```
 
-### Accessing the Dashboard UI
+### Create Admin Service Account
 
 ```
 cat <<END>> dashboard-admin.yaml
@@ -30,14 +30,14 @@ subjects:
   namespace: kube-system
 END 
 ```
-
+- create the cluster-admin Service Account as below:
 ```
 $ kubectl create -f dashboard-admin.yaml
 ```
 
-
+- Now we’re ready to get the token from admin-user by following command:
 ```
-[root@ylclk8sas01 ~]# kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dashboard-admin | awk '{print $1}')
+$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep dashboard-admin | awk '{print $1}')
 Name:         dashboard-admin-token-rdgv9
 Namespace:    kube-system
 Labels:       <none>
@@ -50,7 +50,7 @@ Data
 ====
 ca.crt:     1025 bytes
 namespace:  11 bytes
-token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IlBLLW9RdDB0SC1QSVp2LVlEV3N2dHp0T0taVjk0cllaaGZXRk10NldxeVkifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkYXNoYm9hcmQtYWRtaW4tdG9rZW4tcmRndjkiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGFzaGJvYXJkLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMTg1ZjBmMmQtM2QzNi00MDZkLThhNDgtOTYyZDNlMjc1ZWExIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmRhc2hib2FyZC1hZG1pbiJ9.BL0adtIapVCmwgoVwQIxIxde-qowraJR7xSCl9sXuOqNww_i9VTo-IoeS8rJfY45AQH_G07ZT9EjqWRXJ_kKiAcL5bB7IHJFhUE45LDoC67x22wW3_OYVloSuqgbs0YuyVFJH4uD44Y63o_EFoItXw4ctHvCiIEO371U3_1mw-y7WQrD65LP_hwlN-7SYBR8MWBgMTxCvXlXYUXTvBsPwf5aT9-BCR3mMQvSUgwCIDwcBQx8lJIUaDaFZpAcJWfaPpDRITWs9RQfNqunOYq91wzNpQWKEmu_ekbrIJSMlKXcXv6N_dVx580eU_3fjQGSUe2lbb-8H7yCppkkjFqr-g
+token: <your token will be shown here>
 ```
 
 ### Accessing the Dashboard UI
