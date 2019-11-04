@@ -129,12 +129,12 @@ spec:
   volumes:
   - name: config
     secret:
-      secretName: mysecret
-    items:
-    - key: username
-      path: username
-    - key: password
-      path: password" >> pod-volume.yaml
+      secretName: secret-manifest
+      items:
+      - key: username
+        path: username
+      - key: password
+        path: password" >> pod-volume.yaml
 ```
 
 ```
