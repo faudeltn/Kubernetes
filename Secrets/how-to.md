@@ -129,7 +129,7 @@ spec:
   volumes:
   - name: config
     secret:
-      secretName: secret-manifest
+      secretName: mysecret
       items:
       - key: username
         path: username
