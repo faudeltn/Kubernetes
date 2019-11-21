@@ -7,9 +7,9 @@
 
 1. [My first title](#my-first-title)
 2. [My second title](#my-second-title)
-3. [](#myprova)
+3. [](#my-prova)
 ## My first title
 Some text.
 ## My second title
 
-## myprova
+## my prova
