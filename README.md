@@ -9,7 +9,7 @@
 2. [Dashboard-UI](https://github.com/faudeltn/Kubernetes/blob/master/Dashboard-UI/how-to.md)
 3. [Private registery](https://github.com/faudeltn/Kubernetes/tree/master/Private-registery)
 4. [Secrets](https://github.com/faudeltn/Kubernetes/blob/master/Secrets/how-to.md)
-5. [ReplicaSets](#ReplicaSets)
+5. [ReplicaSets](#replicasets)
 5. [My first title](#my-first-title)
 
 ## ReplicaSets
