@@ -1,0 +1,81 @@
+# elasticsearch-deployment.yml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch
+  namespace: logging
+  labels:
+    app: elasticsearch
+    version: v7.8.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+      version: v7.8.0
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+        version: v7.8.0
+    spec:
+      serviceAccountName: elasticsearch
+      containers:
+      # addon 
+      - image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
+        name: elasticsearch
+        resources:
+          limits:
+            memory: "1.5Gi"
+            cpu: 1000m
+          requests:
+            memory: "1Gi"
+            cpu: 100m
+        env:
+          # 
+          - name: discovery.type
+            value: single-node
+          # 
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          # addon elasticsearch-logging，https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/es-image/elasticsearch_logging_discovery.go
+          - name: ELASTICSEARCH_SERVICE_NAME
+            value: "elasticsearch"
+          # https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/es-image/elasticsearch_logging_discovery.go            
+          - name: MINIMUM_MASTER_NODES
+            value: "1"
+          #- name: "ES_JAVA_OPTS"
+          #  value: "-Xms1024m -Xmx1024m" 
+          #- name: XPACK_SECURITY_ENABLED
+          #  value: "true"
+          - name: ELASTIC_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: elasticsearch-pw-elastic
+                key: password
+        ports:
+        - containerPort: 9200
+          name: db
+          protocol: TCP
+        - containerPort: 9300
+          name: transport
+          protocol: TCP
+        volumeMounts:
+        - name: elasticsearch
+          mountPath: /data
+        - name: config
+          mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          readOnly: true
+          subPath: elasticsearch.yml  
+      volumes:
+      - name: elasticsearch
+        emptyDir: {}
+        # PVC 
+        #persistentVolumeClaim:
+        #  claimName: elasticsearch-pvc
+      - name: config
+        configMap:
+          name: elasticsearch-config
