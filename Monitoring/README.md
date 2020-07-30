@@ -10,7 +10,8 @@ kubectl create secret generic elasticsearch-pw-elastic \
     --from-literal password=Password
 
 
-
+---
 $ git clone https://github.com/kubernetes/kube-state-metrics.git
 $ cd kube-state-metrics
 $ kubectl apply -f examples/standard/
+---
