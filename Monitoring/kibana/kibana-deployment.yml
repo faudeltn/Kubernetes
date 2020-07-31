@@ -25,7 +25,7 @@ spec:
         env:
         - name: ELASTICSEARCH_HOSTS
           #value: "http://elasticsearch-client.elastic.svc.cluster.local:9200"
-          value: "http://elasticsearch-client.logging.svc.cluster.local:9200"
+          value: "http://elasticsearch.logging.svc.cluster.local:9200"
         - name: ELASTICSEARCH_USER
           value: "elastic"
         - name: ELASTICSEARCH_PASSWORD
