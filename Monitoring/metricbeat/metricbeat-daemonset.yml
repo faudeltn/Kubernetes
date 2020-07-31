@@ -40,7 +40,7 @@ spec:
               name: elasticsearch-pw-elastic
               key: password
         - name: KIBANA_HOST
-          value: kibana.elastic.svc.cluster.local
+          value: kibana.logging.svc.cluster.local
         - name: KIBANA_PORT
           value: "5601"
         - name: NODE_NAME
