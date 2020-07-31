@@ -27,7 +27,7 @@ spec:
         ]
         env:
         - name: ELASTICSEARCH_HOST
-          value: elasticsearch-client.elastic.svc.cluster.local
+          value: elasticsearch.logging.svc.cluster.local
         - name: ELASTICSEARCH_PORT
           value: "9200"
         - name: ELASTICSEARCH_USERNAME
@@ -38,7 +38,7 @@ spec:
               name: elasticsearch-pw-elastic
               key: password
         - name: KIBANA_HOST
-          value: kibana.elastic.svc.cluster.local
+          value: kibana.logging.svc.cluster.local
         - name: KIBANA_PORT
           value: "5601"
         - name: NODE_NAME
