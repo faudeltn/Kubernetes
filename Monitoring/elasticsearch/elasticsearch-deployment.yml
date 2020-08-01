@@ -37,6 +37,14 @@ spec:
           - name: discovery.type
             value: single-node
           # 
+          - name: CLUSTER_NAME
+            value: myesdb
+          #
+          - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+          #    
           - name: NAMESPACE
             valueFrom:
               fieldRef:
