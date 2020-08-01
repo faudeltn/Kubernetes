@@ -9,9 +9,9 @@ metadata:
     app: elasticsearch
 data:
   elasticsearch.yml: |-
-    #cluster.name: ${CLUSTER_NAME}
-    cluster.name: k8s
-    #node.name: ${NODE_NAME}
+    cluster.name: ${CLUSTER_NAME}
+    #cluster.name: k8s
+    node.name: ${NODE_NAME}
     #discovery.seed_hosts: ${NODE_LIST}
     #cluster.initial_master_nodes: ${MASTER_NODES}
 
