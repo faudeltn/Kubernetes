@@ -32,7 +32,7 @@ rules:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  namespace: elastic
+  namespace: logging
   name: filebeat
   labels:
     app: filebeat
