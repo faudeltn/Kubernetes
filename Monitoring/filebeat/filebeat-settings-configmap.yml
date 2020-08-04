@@ -36,7 +36,47 @@ data:
                       type: docker
                       containers.ids:
                         - ${data.kubernetes.container.id}
-
+            - condition.contains:
+                kubernetes.labels.app: redis
+              config:
+                - module: redis
+                  log:
+                    input:
+                      type: docker
+                      containers.ids:
+                        - ${data.kubernetes.container.id}
+                  slowlog:
+                    enabled: true
+                    var.hosts: ["${data.host}:${data.port}"]
+            - condition.contains:
+                kubernetes.container.name: apache
+              config:
+                - module: apache2
+                  access:
+                    input:
+                      type: docker
+                      containers.ids:
+                        - ${data.kubernetes.container.id}
+                  error:
+                    input:
+                      type: docker
+                      containers.ids:
+                        - ${data.kubernetes.container.id}
+            - condition.equals:
+                kubernetes.labels.app: mysql
+              config:
+                - module: mysql
+                  error:
+                    input:
+                      type: docker
+                      containers.ids:
+                        - ${data.kubernetes.container.id}
+                  slowlog:
+                    input:
+                      type: docker
+                      containers.ids:
+                        - ${data.kubernetes.container.id}         
+                    
     processors:
       - drop_event:
           when.or:
