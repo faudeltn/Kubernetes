@@ -13,7 +13,7 @@
 6. [Deployments](#deployments)
 
 ## ReplicaSets
-ReplicaSets are the primary method of managing Pod replicas and their lifecycle. This includes their scheduling, scaling, and deletion.
+ReplicaSets are the primary method of managing Pod replicas and their lifecycle. This includes their scheduling, scaling, and deletion. Prova
 
 Their job is simple, always ensure the desired number of replicas that match the selector are running.
 
