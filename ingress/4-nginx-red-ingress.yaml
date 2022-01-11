@@ -4,8 +4,8 @@ kind: Ingress
 metadata:
   name: ingress-demo
   labels:
-    app: nginx-app
-  namespace: nginx-app
+    app: nginx-red
+  namespace: nginx-red
   annotations:
     # Single ALB Ingress Settings
     kubernetes.io/ingress.class: "alb"
@@ -26,7 +26,7 @@ metadata:
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
 spec:
   rules:
-    - host: www.yallalabs.com
+    - host: red.yallalabs.com
       http:
         paths:
           - path: / # SSL Redirect Setting
@@ -35,5 +35,5 @@ spec:
               servicePort: use-annotation
           - path: /
             backend:
-              serviceName: nginx-app
+              serviceName: nginx-red
               servicePort: 80
