@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-service
+  name: nginx-green
 spec:
   type: NodePort
   ports:
