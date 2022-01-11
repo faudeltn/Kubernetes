@@ -17,6 +17,7 @@ spec:
     - http:
         paths:
  #         - path: /*
+               pathType: Prefix
  #           backend:
  #             serviceName: ssl-redirect
  #             servicePort: use-annotation
