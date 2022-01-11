@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: nginx-green
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/group.name: ingress-demo
+    alb.ingress.kubernetes.io/target-type: instance
+    kubernetes.io/ingress.class: alb
+    # Health Check Settings
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+  name: nginx-green
+spec:
+  rules:
+    - host: green.yallalabs.com
+    - http:
+        paths:
+ #         - path: /*
+ #           backend:
+ #             serviceName: ssl-redirect
+ #             servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: nginx-green
+              servicePort: 80
+            
+            
