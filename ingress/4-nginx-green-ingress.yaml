@@ -10,7 +10,7 @@ metadata:
     # Health Check Settings
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port
-  name: nginx-green
+  name: ingress-demo
 spec:
   rules:
     - host: green.yallalabs.com
