@@ -4,6 +4,7 @@ metadata:
   labels:
     run: nginx
   name: nginx-deploy-blue
+  namespace: nginx-blue
 spec:
   replicas: 1
   selector:
