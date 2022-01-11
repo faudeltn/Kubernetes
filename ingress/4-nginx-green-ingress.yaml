@@ -20,12 +20,8 @@ spec:
  #           backend:
  #             serviceName: ssl-redirect
  #             servicePort: use-annotation
-          - path: /
-            pathType: Prefix
+          - path: /*
             backend:
-              service:
-                name: nginx-green
-                port: 
-                  number: 80
-            
-            
+              serviceName: nginx-green
+              servicePort: 80
+        
