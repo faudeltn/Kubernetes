@@ -14,14 +14,10 @@ metadata:
 spec:
   rules:
     - host: blue.yallalabs.com
-    - http:
+      http: 
         paths:
- #         - path: /*
- #           backend:
- #             serviceName: ssl-redirect
- #             servicePort: use-annotation
-          - path: /*
-            backend:
+          - backend:
               serviceName: nginx-blue
               servicePort: 80
+            path: /   
         
