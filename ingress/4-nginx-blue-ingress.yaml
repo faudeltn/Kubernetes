@@ -23,7 +23,7 @@ spec:
           - path: /*
             backend:
               service:
-                name: nginx-green
+                name: nginx-blue
                 port: 
                   number: 80
             
