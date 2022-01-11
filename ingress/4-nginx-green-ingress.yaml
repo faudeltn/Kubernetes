@@ -21,6 +21,7 @@ spec:
  #             serviceName: ssl-redirect
  #             servicePort: use-annotation
           - path: /*
+              pathType: Prefix
             backend:
               service:
                 name: nginx-green
