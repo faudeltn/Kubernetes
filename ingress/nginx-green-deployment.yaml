@@ -4,6 +4,7 @@ metadata:
   labels:
     run: nginx
   name: nginx-deploy-green
+  namespace: nginx-green
 spec:
   replicas: 1
   selector:
