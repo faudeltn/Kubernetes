@@ -2,7 +2,7 @@
 
 
 
-#Deploy the Metrics Server
+# Deploy the Metrics Server
 Metrics Server is a scalable, efficient source of container resource metrics for Kubernetes built-in autoscaling pipelines.
 
 These metrics will drive the scaling behavior of the deployments.
