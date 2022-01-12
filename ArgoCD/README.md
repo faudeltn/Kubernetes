@@ -41,8 +41,8 @@ type: NodePort
 Once we create this service, we can configure the Ingress
 
 ```bash
-kubectl create namespace argo
-kubectl apply -n argo -f /
+kubectl create namespace argocd
+kubectl apply -n argocd -f /
 ```
 
 ```bash
