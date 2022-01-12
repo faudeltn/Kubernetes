@@ -15,23 +15,30 @@ kubectl create namespace argo
 kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/${ARGO_VERSION}/manifests/install.yaml
 ```
 
-Disable internal TLS
-First, to avoid internal redirection loops from HTTP to HTTPS, the API server should be run with TLS disabled. Edit the argocd-server deployment to add the --insecure flag to the argocd-server command
+### Disable internal TLS
+
+First, to avoid internal redirection loops from HTTP to HTTPS, the API server should be run with TLS disabled. Edit the argocd-server deployment to add the --insecure flag to the argocd-server command.
 
 The container command should change from:
-
-
+```yaml
       containers:
       - command:
         - argocd-server
+        - --staticassets
+        - /shared/app
+```
 
 To:
-
-
+```yaml
       containers:
       - command:
         - argocd-server
         - --insecure
+        - --staticassets
+        - /shared/app
+```
+
+### Creating a service
         
  Use NodePort
  
