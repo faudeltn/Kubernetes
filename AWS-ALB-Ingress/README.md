@@ -30,6 +30,7 @@ eksctl create iamserviceaccount \
     --approve \
     --region <REGION>
 ```
+
 ```bash
 eksctl  get iamserviceaccount --cluster  <CLUSTER_NAME>
 ```
@@ -40,3 +41,30 @@ Output
 NAMESPACE       NAME                            ROLE ARN
 kube-system     aws-load-balancer-controller    arn:aws:iam::<ACCOUNT_ID>:role/eksctl-eks-demo-addon-iamserviceaccount-kube-Role1-6PRU9IPUNAD1
 ```
+
+
+```
+curl -fsSL -o iam_policy_v1_to_v2_additional.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.1/docs/install/iam_policy_v1_to_v2_additional.json
+
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerAdditionalIAMPolicy \
+    --policy-document file://iam_policy_v1_to_v2_additional.json
+```
+
+```
+aws iam attach-role-policy \
+    --role-name <IAM_ROLE_NAME> \
+    --policy-arn arn:aws:iam::<ACCOUNT_ID>:policy/AWSLoadBalancerControllerAdditionalIAMPolicy
+```
+
+```
+helm repo add eks https://aws.github.io/eks-charts
+kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
+```
+
+```
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
+     --set clusterName=<CLUSTER_NAME> \
+     --set serviceAccount.create=false \
+     --set serviceAccount.name=aws-load-balancer-controller
+```     
