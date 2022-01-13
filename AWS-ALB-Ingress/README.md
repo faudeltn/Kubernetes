@@ -82,3 +82,15 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
      --set serviceAccount.create=false \
      --set serviceAccount.name=aws-load-balancer-controller
 ```     
+
+
+Verify that the controller is installed.
+```bash
+kubectl get deployment -n kube-system aws-load-balancer-controller
+```
+
+Output
+```bash
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+aws-load-balancer-controller   2/2     2            2           84s
+```
