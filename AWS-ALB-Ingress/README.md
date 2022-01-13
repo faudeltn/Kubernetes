@@ -1,5 +1,9 @@
 
+###Prerequisites
 
+An existing Amazon EKS cluster. 
+
+An existing AWS Identity and Access Management (IAM) OpenID Connect (OIDC) provider for your cluster. To determine whether you already have one, or to create one, see Create an IAM OIDC provider for your cluster.
 
 ```bash
 
@@ -7,7 +11,6 @@ eksctl utils associate-iam-oidc-provider \
     --region <REGION> \
     --cluster <CLUSTER_NAME> \
     --approve
-
 ```
 
 Download an IAM policy for the AWS Load Balancer Controller that allows it to make calls to AWS APIs on your behalf
