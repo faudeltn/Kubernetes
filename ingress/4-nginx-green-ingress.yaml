@@ -1,4 +1,5 @@
-apiVersion: networking.k8s.io/v1beta1
+#apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: nginx-green
@@ -13,11 +14,22 @@ metadata:
   name: nginx-green             
 spec:
   rules:
-    - host: green.yallalabs.com
-      http: 
-        paths:
-          - backend:
-              serviceName: nginx-green
-              servicePort: 80
-            path: /              
+  - host: "green.yallalabs.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: nginx-green
+            port:
+              number: 80
+  
+    # - host: green.yallalabs.com
+    #   http: 
+    #     paths:
+    #       - backend:
+    #           serviceName: nginx-green
+    #           servicePort: 80
+    #         path: /              
         
