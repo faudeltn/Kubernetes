@@ -1,5 +1,6 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+#apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-red
@@ -21,19 +22,33 @@ metadata:
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
     ## SSL Settings
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:153040798572:certificate/7a2782f2-db00-4e05-9b17-4f17b1c06f7a ### MY ACM
+    alb.ingress.kubernetes.io/certificate-arn: ### MY ACM
     # SSL Redirect Setting
-    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    #alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
 spec:
   rules:
-    - host: red.yallalabs.com
-      http:
-        paths:
-          - path: / # SSL Redirect Setting
-            backend:
-              serviceName: ssl-redirect
-              servicePort: use-annotation
-          - path: /
-            backend:
-              serviceName: nginx-red
-              servicePort: 80
+  - host: "red.yallalabs.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: nginx-red
+            port:
+              number: 80
+
+# spec:
+#   rules:
+#     - host: red.yallalabs.com
+#       http:
+#         paths:
+#           - path: / # SSL Redirect Setting
+#             backend:
+#               serviceName: ssl-redirect
+#               servicePort: use-annotation
+#           - path: /
+#             backend:
+#               serviceName: nginx-red
+#               servicePort: 80

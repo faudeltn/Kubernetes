@@ -1,4 +1,5 @@
-apiVersion: networking.k8s.io/v1beta1
+#apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: nginx-blue
@@ -13,11 +14,14 @@ metadata:
   name: nginx-blue
 spec:
   rules:
-    - host: blue.yallalabs.com
-      http: 
-        paths:
-          - backend:
-              serviceName: nginx-blue
-              servicePort: 80
-            path: /   
+  - host: "blue.yallalabs.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: nginx-blue
+            port:
+              number: 80
         
