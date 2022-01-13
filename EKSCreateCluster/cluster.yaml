@@ -1,0 +1,14 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks-demo
+  region: us-east-1
+
+nodeGroups:
+  - name: eks-demo-ng
+    instanceType: t3.medium
+    desiredCapacity: 4
+    #volumeSize: 80
+    ssh:
+      allow: true
