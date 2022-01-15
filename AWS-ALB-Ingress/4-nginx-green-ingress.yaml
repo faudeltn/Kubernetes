@@ -19,22 +19,13 @@ metadata:
   name: nginx-green             
 spec:
   rules:
-  - host: "green.yallalabs.com"
+  - host: green.dev.yallalabs.com
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /
         backend:
           service:
             name: nginx-green
             port:
               number: 80
-  
-    # - host: green.yallalabs.com
-    #   http: 
-    #     paths:
-    #       - backend:
-    #           serviceName: nginx-green
-    #           servicePort: 80
-    #         path: /              
-        
