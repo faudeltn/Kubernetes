@@ -1,30 +1,35 @@
 
-
+```bash
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 AWS_REGION=us-east-1
 EKS_CLUSTER_NAME=eks-demo
+```
 
+```bash
 aws eks describe-cluster \
     --name ${EKS_CLUSTER_NAME} \
     --query "cluster.identity.oidc.issuer" \
     --output text
+```
 
-##################
 or 
-
+```bash
 aws iam list-open-id-connect-providers \
        --region ${AWS_REGION} 
+```
 
-#######
 
-
+```bash
 eksctl utils associate-iam-oidc-provider \
     --region ${AWS_REGION} \
     --cluster ${EKS_CLUSTER_NAME} \
     --approve
+```
 
+```bash
 kubectl create namespace external-dns
-
+```
+```bash
 eksctl create iamserviceaccount \
     --name external-dns \
     --namespace external-dns \
@@ -32,9 +37,9 @@ eksctl create iamserviceaccount \
     --attach-policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/AllowExternalDNSUpdates \
     --approve \
     --override-existing-serviceaccounts
+```
 
-
-
+```bash
 cat > manifest.yaml << EOF
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -95,6 +100,8 @@ spec:
       securityContext:
         fsGroup: 65534 # For ExternalDNS to be able to read Kubernetes and AWS token files
 EOF
+```
 
-
+```bash
 kubectl create -f external-dns-all.yaml -n external-dns
+```
