@@ -37,7 +37,7 @@ metadata:
       } 
 spec:
   rules:
-  - host: red.yallalabs.com
+  - host: red.dev.yallalabs.com
     http:
       paths:
       - path: /    
@@ -53,18 +53,4 @@ spec:
           service:
             name: nginx-red
             port: 
-              number: 80            
-      
-# spec:
-#   rules:
-#     - host: red.yallalabs.com
-#       http:
-#         paths:
-#           - path: / # SSL Redirect Setting
-#             backend:
-#               serviceName: ssl-redirect
-#               servicePort: use-annotation
-#           - path: /
-#             backend:
-#               serviceName: nginx-red
-#               servicePort: 80
+              number: 80
