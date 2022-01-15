@@ -19,11 +19,11 @@ metadata:
   name: nginx-blue
 spec:
   rules:
-  - host: "blue.yallalabs.com"
+  - host: blue.dev.yallalabs.com
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /
         backend:
           service:
             name: nginx-blue
