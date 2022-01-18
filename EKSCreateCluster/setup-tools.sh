@@ -5,6 +5,7 @@ if [ ! `which kubectl 2> /dev/null` ]; then
   chmod +x ./kubectl
   sudo mv ./kubectl  /usr/local/bin/kubectl > /dev/null
   kubectl completion bash >>  ~/.bash_completion
+  kubectl version --short --client
 fi
 
 if [ ! `which eksctl 2> /dev/null` ]; then
@@ -13,11 +14,20 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv -v /tmp/eksctl /usr/local/bin > /dev/null
 echo "eksctl completion"
 eksctl completion bash >> ~/.bash_completion
+eksctl version
 fi
 
 if [ ! `which helm 2> /dev/null` ]; then
-  echo "helm"
+  echo "install helm 3"
   export VERIFY_CHECKSUM=false
   curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 fi
+echo "add helm repos"
+helm repo add eks https://aws.github.io/eks-charts
 
+if [ ! `which kubectx 2> /dev/null` ]; then
+  echo "kubectx"
+  sudo git clone -q https://github.com/ahmetb/kubectx /opt/kubectx > /dev/null
+  sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+  sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+fi
