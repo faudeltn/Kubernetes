@@ -1,3 +1,5 @@
+Resource: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
+
 01- Generate a key Pair
 ```
 openssl genrsa -out waderni.key 2048
