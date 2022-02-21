@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-cluster-http01-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: certs@yallalabs.com
+    privateKeySecretRef:
+      name: letsencrypt-cluster-prod-http01-key-pair
+    solvers:
+    - http01:
+        ingress:
+          class:  external-nginx

@@ -1,0 +1,29 @@
+#Resources: 
+#   https://github.com/antonputra/tutorials/tree/main/lessons/083
+#   https://faun.pub/eks-with-nginx-ingress-controller-and-helm3-daee18175d45
+#   https://www.youtube.com/watch?v=9sLHoEyRq8w
+#   https://www.youtube.com/watch?v=7m4_kZOObzw
+#
+# https://arabitnetwork.com/2021/02/25/k8s-installing-nginx-ingress-easy-steps/
+
+1. 
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+helm install ingress-nginx ingress-nginx/ingress-nginx
+
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+  --namespace ingress \
+  --version 4.0.1 \
+  --values nginx-ingress-values.yaml \
+  --create-namespace
+
+2. 
+helm repo add jetstack https://charts.jetstack.io
+
+helm install cert-manager jetstack/cert-manager \
+     --namespace cert-manager \
+     --create-namespace \
+     --version v1.5.3 \
+     --set installCRDs=true
+
+3. 
