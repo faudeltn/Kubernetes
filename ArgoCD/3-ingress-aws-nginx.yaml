@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cluster-http01-prod
+spec:
+  ingressClassName: external-nginx
+  tls:
+  - hosts:
+    - argocd.yallalabs.com
+    secretName: argocd-yallalabs-com-key-pair
+  rules:
+  - host: argocd.yallalabs.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 80 
